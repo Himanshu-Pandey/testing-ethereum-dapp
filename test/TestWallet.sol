@@ -6,12 +6,16 @@ import "../contracts/Wallet.sol";
 
 contract TestWallet {
 
-  function testInitialAmount20000() public {
+  function testInitialAmountShouldBe20k() public {
+    Wallet wall = new Wallet();
+    uint expected = 20000;
+    Assert.equal(wall.getAmountValue(), expected, "Wallet should be 20000 initially");
+  }
 
-    Wallet wallet = new Wallet();
-    uint walletAmount = wallet.getAmountValue();
-
-    Assert.equal(walletAmount,20000,"Amount has to be 20000");
+  function testShouldRemove100Successfully() public{
+    Wallet wall = new Wallet();
+    wall.withdrawAmount(100);
+    Assert.equal(wall.getAmountValue(), 19900, "Wallet should be 19900");
   }
 
 }
